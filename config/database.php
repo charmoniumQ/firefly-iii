@@ -105,7 +105,7 @@ return [
             'prefix'      => '',
             'search_path' => envNonEmpty('PGSQL_SCHEMA', 'public'),
             'schema'      => envNonEmpty('PGSQL_SCHEMA', 'public'),
-            'sslmode'     => envNonEmpty('PGSQL_SSL_MODE', 'prefer'),
+            'sslmode'     => envNonEmpty('PGSQL_SSL_MODE', getenv('DB_SOCKET') != false ? '' : 'prefer'),
             'sslcert'     => envNonEmpty('PGSQL_SSL_CERT'),
             'sslkey'      => envNonEmpty('PGSQL_SSL_KEY'),
             'sslrootcert' => envNonEmpty('PGSQL_SSL_ROOT_CERT'),
