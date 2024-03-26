@@ -96,7 +96,7 @@ return [
         'pgsql'  => [
             'driver'      => 'pgsql',
             'host'        => envNonEmpty('DB_HOST', $host),
-            'port'        => envNonEmpty('DB_PORT', $port),
+            'port'        => envNonEmpty('DB_PORT', env('DB_SOCKET', '') === '' ? $port : null),
             'database'    => envNonEmpty('DB_DATABASE', $database),
             'username'    => envNonEmpty('DB_USERNAME', $username),
             'password'    => env('DB_PASSWORD', $password),
@@ -104,10 +104,11 @@ return [
             'prefix'      => '',
             'search_path' => envNonEmpty('PGSQL_SCHEMA', 'public'),
             'schema'      => envNonEmpty('PGSQL_SCHEMA', 'public'),
-            'sslmode'     => envNonEmpty('PGSQL_SSL_MODE', 'prefer'),
+            'sslmode' => env('DB_SSL_MODE', env('DB_SOCKET', '') === '' ? 'prefer' : null),
             'sslcert'     => envNonEmpty('PGSQL_SSL_CERT'),
             'sslkey'      => envNonEmpty('PGSQL_SSL_KEY'),
             'sslrootcert' => envNonEmpty('PGSQL_SSL_ROOT_CERT'),
+            'unix_socket' => env('DB_SOCKET', ''),
         ],
         'sqlsrv' => [
             'driver'   => 'sqlsrv',
