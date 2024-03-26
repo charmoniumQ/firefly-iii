@@ -70,13 +70,16 @@ if (false !== $useSSL && null !== $useSSL && '' !== $useSSL) {
     }
 }
 
+echo (envNonEmpty('DB_SOCKET', '') === '') === false;
+echo "\n";
+echo is_null(envNonEmpty('DB_PORT', (envNonEmpty('DB_SOCKET', '') === '') ? $port : null));
 print_r([
             'driver'      => 'pgsql',
             'host'        => envNonEmpty('DB_HOST', $host),
             'port'        => envNonEmpty('DB_PORT', (envNonEmpty('DB_SOCKET', '') === '') ? $port : null),
             'database'    => envNonEmpty('DB_DATABASE', $database),
             'username'    => envNonEmpty('DB_USERNAME', $username),
-            'password'    => envNonEmpty('DB_PASSWORD', (envNonEmpty('DB_SOCKET', '') === '') ? $password : null),
+            'password'    => envNonEmpty('DB_PASSWORD', $password),
             'charset'     => 'utf8',
             'prefix'      => '',
             'search_path' => envNonEmpty('PGSQL_SCHEMA', 'public'),
@@ -117,7 +120,7 @@ return [
             'port'        => envNonEmpty('DB_PORT', (envNonEmpty('DB_SOCKET', '') === '') ? $port : null),
             'database'    => envNonEmpty('DB_DATABASE', $database),
             'username'    => envNonEmpty('DB_USERNAME', $username),
-            'password'    => envNonEmpty('DB_PASSWORD', (envNonEmpty('DB_SOCKET', '') === '') ? $password : null),
+            'password'    => envNonEmpty('DB_PASSWORD', $password),
             'charset'     => 'utf8',
             'prefix'      => '',
             'search_path' => envNonEmpty('PGSQL_SCHEMA', 'public'),
