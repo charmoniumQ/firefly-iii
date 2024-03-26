@@ -70,6 +70,24 @@ if (false !== $useSSL && null !== $useSSL && '' !== $useSSL) {
     }
 }
 
+print_r([
+            'driver'      => 'pgsql',
+            'host'        => envNonEmpty('DB_HOST', $host),
+            'port'        => envNonEmpty('DB_PORT', env('DB_SOCKET', '') === '' ? $port : 'null'),
+            'database'    => envNonEmpty('DB_DATABASE', $database),
+            'username'    => envNonEmpty('DB_USERNAME', $username),
+            'password'    => env('DB_PASSWORD', $password),
+            'charset'     => 'utf8',
+            'prefix'      => '',
+            'search_path' => envNonEmpty('PGSQL_SCHEMA', 'public'),
+            'schema'      => envNonEmpty('PGSQL_SCHEMA', 'public'),
+            'sslmode' => env('DB_SSL_MODE', env('DB_SOCKET', '') === '' ? 'prefer' : 'null'),
+            'sslcert'     => envNonEmpty('PGSQL_SSL_CERT'),
+            'sslkey'      => envNonEmpty('PGSQL_SSL_KEY'),
+            'sslrootcert' => envNonEmpty('PGSQL_SSL_ROOT_CERT'),
+            'unix_socket' => env('DB_SOCKET', ''),
+        ]);
+
 return [
     'default'     => envNonEmpty('DB_CONNECTION', 'mysql'),
     'connections' => [
