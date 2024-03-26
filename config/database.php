@@ -117,7 +117,6 @@ return [
         'pgsql'  => [
             'driver'      => 'pgsql',
             'host'        => envNonEmpty('DB_HOST', $host),
-            'port'        => envNonEmpty('DB_PORT', (envNonEmpty('DB_SOCKET', '') === '') ? $port : null),
             'database'    => envNonEmpty('DB_DATABASE', $database),
             'username'    => envNonEmpty('DB_USERNAME', $username),
             'password'    => envNonEmpty('DB_PASSWORD', $password),
